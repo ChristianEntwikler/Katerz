@@ -1,0 +1,136 @@
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;"> 
+    ]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Katerz</title>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta> 
+        
+        
+    <h:outputStylesheet library="primefaces" name="primefaces.css"/>                   
+
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon"></link>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../css/style.css"></link>
+    <link rel="stylesheet" href="../css/responsive.css"></link>
+    <link rel="stylesheet" href="../css/custom.css"></link>
+    </h:head>
+    <style type="text/css">
+              
+            .ui-panelgrid tr, .ui-panelgrid td
+            {
+            border:1px groove #f1f1f1 !important;
+            font-size: 9pt !important;
+            }
+            
+            .dataTable
+            {
+             background: linear-gradient(90deg, #58974e, #02402d);
+             border:1px groove #7bc3f3;
+             font-size: 9pt !important;
+            }
+            
+            .dataTables_paginate
+            {
+             background: linear-gradient(90deg, #58974e, #02402d);
+             border:1px groove #7bc3f3;
+            }
+            
+            .dataTables_empty
+            {
+             background: linear-gradient(90deg, #58974e, #02402d);
+             border:1px groove #7bc3f3;
+             font-size: 9pt !important;
+            }
+            
+            .ui-datatable thead th {
+            background-image: none !important;
+            background: linear-gradient(90deg, #58974e, #02402d);
+            color: #000000 !important;
+            font-size: 9pt !important;
+            }  
+            
+            .ui-datatable tr td {
+            background-image: none !important;
+            background: linear-gradient(90deg, #58974e, #02402d);
+            color: #000000 !important;
+            font-size: 9pt !important;
+            }  
+              
+              </style>
+    <body>
+        <div class="main-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h3 style="color:#ffffff;">Katerz Platform</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="index.xhtml">Home</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <div class="attr-nav">
+                    <ul>
+                        <li class="side-menu">
+			<a href="cart.xhtml">
+			<i class="fa fa-cart-plus"></i>
+			<p>My Cart</p>
+			</a>
+			</li>
+                        <li class="side-menu">
+			<a href="order.xhtml">
+			<i class="fa fa-wallet"></i>
+			<p>Order</p>
+			</a>
+			</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </nav>
+        <!-- End Navigation -->
+    </header>
+                               
+                <ui:insert name="content">
+                            <div style='background-color:#152036;'>
+                                
+                            </div>
+                        </ui:insert>
+        
+            <p:ajaxStatus onstart="PF('status').show()" onsuccess="PF('status').hide()" oncomplete="PF('status').hide()" />
+                
+                <p:dialog widgetVar="status" modal="true" draggable="false" closable="false" resizable="false" showHeader="false" style="height:180px; background: linear-gradient(180deg, rgba(181,216,235,0.7), rgba(232,249,252,0.7)); border:0px groove #1d82a4;">
+                    <p:graphicImage library="images"  name="loading.gif" style="width:120px;height:120px;" />
+                </p:dialog> 
+    </body>
+</html>
+

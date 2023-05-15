@@ -1,0 +1,247 @@
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;"> 
+    ]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    </h:head>
+    <body>
+       <ui:composition template="./masterpage.xhtml">
+            <ui:define name="content">
+                <h:form id ="frmpnl" rendered="#{cartController.listCartItems().size() > 0}">
+               <div class="cart-box-main">
+        <div class="container">
+                <div class="row">
+                    <p:messages id="msg" />
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>Billing address</h3>
+                        </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fname">First name *</label>
+                                    <h:inputText id="fname" class='form-control' value="#{webController.cst.firstName}" readonly="true" pt:placeholder='Enter firstname' style="padding-bottom:0%; margin-bottom:2%;" />
+                                    <div class="invalid-feedback"> Valid first name is required. </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="sname">Last name *</label>
+                                    <h:inputText id="sname" class='form-control' value="#{webController.cst.lastName}" readonly="true" pt:placeholder='Enter lastname' style="padding-bottom:0%; margin-bottom:2%;" />
+                                    <div class="invalid-feedback"> Valid last name is required. </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="emailaddr">Email Address *</label>
+                                <h:inputText id="emailaddr" class='form-control' value="#{webController.cst.emailAddress}" readonly="true" pt:placeholder='Enter email address' style="padding-bottom:0%; margin-bottom:2%;" />
+                                <div class="invalid-feedback"> Please enter a valid email address. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="addr">Address *</label>
+                                <h:inputText id="addr" class='form-control' value="#{webController.cst.address}" readonly="true" pt:placeholder='Enter address' style="padding-bottom:0%; margin-bottom:2%;" />
+                                <div class="invalid-feedback"> Please enter your address. </div>
+                            </div>
+                            <hr />
+                             
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="odr-box">
+                                <div class="title-left">
+                                    <h3>Shopping cart</h3>
+                                </div>
+                                <div class="rounded p-2 bg-light">
+                                    <p:repeat value="#{cartController.listCartItems()}" var="itms">
+                                    <div class="media mb-2 border-bottom">
+                                        <div class="media-body"> #{itemController.fetchItemName(itms.itemId)}
+                                            <div class="small text-muted">Price: &#163;#{itms.unitPrice} <span class="mx-2">|</span> Qty: #{itms.quantity} </div>
+                                        </div>
+                                    </div>
+                                    </p:repeat>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="order-box">
+                                <div class="title-left">
+                                    <h3>Your order</h3>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="font-weight-bold">Product</div>
+                                    <div class="ml-auto font-weight-bold">Total</div>
+                                </div>
+                                <hr />
+                                <div class="d-flex">
+                                    <h4>Sub Total</h4>
+                                    <div class="ml-auto font-weight-bold"> &#163;#{cartController.subTotal()} </div>
+                                </div>
+                                
+                                <div class="d-flex gr-total">
+                                    <h5>Grand Total</h5>
+                                    <div class="ml-auto h5"> &#163;#{cartController.grandTotal()} </div>
+                                </div>
+                                <hr /> </div>
+                        </div>
+                        <div class="title"> <span>Payment </span> </div>
+                            <div class="d-block my-3">
+                                <br/>
+                                <table>
+                                    <tr>
+                                        <td><p:commandButton id="cshcmd" value="Cash" class="btn btn-success" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%; margin-top:-15%;" onclick="PF('dlg').show();" update="" />
+</td>
+                                        <td><div id="paypal-button-container"></div></td>
+                                    </tr>
+                                </table>
+                                
+    <h:panelGroup id="viewpnl" >
+                         <p:dialog header="Item Details" widgetVar="dlg" showEffect="explode" hideEffect="explode" width="78%" height="310" style="margin-top:-250px">
+                    <p:scrollPanel id="leftpane" mode="native" class="panel" style="width:98%;height:300px;background-color: #EFF1F2;border: 0px;float: left" >
+
+                   <div class="col-md-12 padding-0">
+                    <div class="col-md-12">
+                      <div class="panel form-element-padding">
+                        <div class="panel-heading">
+                         <h4 style="color:#000000;">Item Details</h4>
+                        </div>
+                         <div class="panel-body" style="padding-bottom:30px;">
+                          <div class="col-md-12">
+                           
+                           
+                            <div class="form-group"><label class="col-sm-3 control-label text-right">Amount Paid</label>
+                              <div class="col-sm-9">
+                                  <p:inputNumber decimalPlaces="2" id="idamt" pt:placeholder="Amount Paid" value="#{webController.amountPaid}" autocomplete="false" >
+                                  </p:inputNumber>
+                              </div>
+                            </div><br/> 
+                              
+                             
+
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-10">
+
+                                <div class="col-md-3" style="margin-left:0%;">
+                             <p:commandButton ajax="false" value="Close" id="sbtnCancel" class=" btn btn-gradient btn-warning" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%;" />
+                            <br/>
+                                </div>
+                                <div class="col-md-6" style="margin-left:0%;">
+                             <p:commandButton id="subitm" value="Submit" class="cart" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%;" actionListener="#{webController.cashPayment()}" update="@form" />
+                            </div>
+                                </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                    </p:scrollPanel>                           
+                 </p:dialog>
+              
+                    </h:panelGroup>
+    
+                                </div>
+                            
+                            
+                            <hr />
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+                </h:form>
+
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AVEry6ws5XFhH2ZQYAPJ2UxsxVSUQ0EuXb2tAh7_BmuiGXi66EV9jPwua0cqg1Ccvm-uY5H38KvXhXXU&amp;currency=GBP"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+            style: {
+                    layout: 'horizontal',
+                    color:  'blue',
+                    shape:  'rect',
+                    label:  'paypal'
+                  },
+
+            // Call your server to set up the transaction
+            createOrder: function(data, actions) {
+                return fetch('http://localhost:8181/api/payment/send', {
+                    method: 'post'
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(orderData) {
+                    return orderData.id;
+                });
+            },
+
+            // Call your server to finalize the transaction
+            onApprove: function(data, actions) {
+                return fetch('http://localhost:8181/api/payment/' + data.orderID + '/capture/', {
+                    method: 'post'
+                }).then(function(res) {
+                    //console.log(res);
+                    return res.json();
+                }).then(function(orderData) {
+                    // Three cases to handle:
+                    //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                    //   (2) Other non-recoverable errors -> Show a failure message
+                    //   (3) Successful transaction -> Show confirmation or thank you
+
+                    // This example reads a v2/checkout/orders capture response, propagated from the server
+                    // You could use a different API or structure for your 'orderData'
+                    var errorDetail = Array.isArray(orderData.details); 
+
+                    if (errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                        return actions.restart(); // Recoverable state, per:
+                        // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                    }
+
+                    if (errorDetail) {
+                        console.log(errorDetail.description);
+                        var msg = 'Sorry, your transaction could not be processed.';
+                        if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+                        if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
+                        return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+                    }
+
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                    window.location.replace("http://localhost:8181/order.xhtml");
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+    
+                                
+                                
+                                
+                            
+
+           
+        
+                        
+     </ui:define>
+       </ui:composition>
+    </body>
+</html>
+

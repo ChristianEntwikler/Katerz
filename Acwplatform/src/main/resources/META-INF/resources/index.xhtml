@@ -1,0 +1,311 @@
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;"> 
+    ]>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>        
+        <f:facet name="first">
+                    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, chrome=1, IE=Edge"/>
+                    <meta charset="UTF-8"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+
+                </f:facet>
+    </h:head>
+    
+    <style type="text/css">
+              
+            .ui-panelgrid tr, .ui-panelgrid td
+            {
+            border:1px groove #f1f1f1 !important;
+            }
+            
+            .dataTable
+            {
+             background: linear-gradient(90deg, #2c2752, #02402d);
+             border:1px groove #7bc3f3;
+            }
+            
+            .dataTables_paginate
+            {
+             background: linear-gradient(90deg, #2c2752, #02402d);
+             border:1px groove #7bc3f3;
+            }
+            
+            .dataTables_empty
+            {
+             background: linear-gradient(90deg, #2c2752, #02402d);
+             border:1px groove #7bc3f3;
+            }
+            
+            .ui-datatable thead th {
+            background-image: none !important;
+            background: linear-gradient(90deg, #2c2752, #02402d);
+            color: #000000 !important;
+            } 
+            
+            .ui-panel-titlebar .ui-datatable thead th {
+            background-image: none !important;
+            background: linear-gradient(90deg, #2c2752, #02402d);
+            color: #000000 !important;
+            }
+            
+            .ui-panel-titlebar .ui-datatable thead {
+            background-image: none !important;
+            background: linear-gradient(90deg, #2c2752, #02402d);
+            color: #000000 !important;
+            }
+                        
+            .ui-custompanelgrid, .ui-custompanelgrid td {
+            font-weight: bold;
+            background-color: blue !important;
+            }
+            
+            .ui-panel-titlebar
+            {
+            background: linear-gradient(90deg, #2c2752, #02402d);
+            border: 0px solid #ffffff;
+            }
+            
+            .ui-selectmenu-menu
+            {
+             background-color:#02402d;   
+            }
+            .panel-heading
+            {
+                background-color:#02402d;
+            }
+            
+            .panel-collapse
+            {
+                background-color:#02402d;
+            }
+            
+            .ui-fileupload
+            {
+                background-color:#02402d;
+                font-size: 10pt;
+            }
+            
+            .fileupload-buttonbar {
+                background: transparent none;
+                border: none;
+                font-size: 10pt;
+            }
+
+            .fileupload-content {
+                display: none;
+                font-size: 10pt;
+                
+            }
+
+            .ui-fileupload .fileinput-button {
+                background-color:#02402d;
+                font-weight:normal;
+                font-size: 10pt;
+                border: 0px solid #ffffff;
+            }
+            
+            .ui-fileupload-buttonbar .ui-fileupload-choose {
+                background-color:#02402d;
+                font-weight:normal;
+                font-size: 10pt;
+                border: 0px solid #ffffff;
+            }
+            
+            .ui-button-text-icon-left .ui-button-text {        
+                font-weight:normal;
+                color:#ffffff;
+              }
+              
+              .ui-datatable .ui-datatable-header {
+                
+            }
+            
+            .ui-datatable .ui-paginator {
+                background: linear-gradient(90deg, #2c2752, #02402d);
+                border: 0px solid #ffffff;
+            }
+            
+            
+            .ui-calendar
+            {
+             /*background: linear-gradient(90deg, #2c2752, #02402d);*/
+             background-color: transparent;
+             border:1px groove #2c2752;
+             font-size:8pt;
+             color:#2c2752;
+             text-decoration: none;
+            }
+            
+            .hasDatepicker
+            {
+             /*background: linear-gradient(90deg, #2c2752, #02402d);*/
+             background-color: transparent;
+             border:1px groove #2c2752;
+             font-size:8pt;
+             text-decoration: none;
+            }
+            .ui-inputfield
+            {
+             width:100%;
+             padding:2%;
+             /*background: linear-gradient(90deg, #2c2752, #02402d);*/
+             background-color: rgba(255,255,255,0.3);
+             border:1px groove #2c2752;
+             font-size:8pt;
+             color:#000;
+             font-weight:bold;
+             text-decoration: none;
+             box-shadow: none;
+            }
+            
+            .ui-inputfield:hover
+            {
+             box-shadow: none;
+            }
+            .ui-widget
+            {
+             font-size:8pt;
+             color:#000;
+             text-decoration: none;
+            } 
+            .ui-state-default
+            {
+             border:0px groove #2c2752;
+             font-size:8pt;
+             text-decoration: none;
+            }
+            .ui-corner-all
+            {
+             border:1px groove #2c2752;
+             font-size:8pt;
+            }    
+            
+            .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+            border-color: transparent;
+            }
+
+            .customPanelGrid .ui-panelgrid-content {
+                border-color: transparent;
+            }
+
+              
+              </style>
+    
+    <body>
+        <ui:composition template="./masterpage.xhtml">
+            <ui:define name="content">
+            
+        <h:form id ="frmpnl">
+            <p:messages id="msg" />
+        <div class="products-box">
+        <div class="container">
+            <div class="row special-list">
+                <p:repeat value="#{itemController.fetchItems()}" var="itms">
+                <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">Sale</p>
+                            </div>
+                            <div class="img-fluid" >QTY: #{itms.quantity} </div>
+                            <div class="mask-icon">
+                                <p:commandButton id="cshcmd" value="Add to Cart" class="cart" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%; margin-top:0%;" actionListener="#{cartController.addCartItem(itms)}" update=":frmpnl:viewpnl" />
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>#{itms.name}</h4>
+                            <h5> &#163;#{itms.unitPrice}</h5>
+                        </div>
+                    </div>
+                </div>
+                </p:repeat>
+
+            </div>
+            </div>
+            </div>
+            
+            <h:panelGroup id="viewpnl" >
+                         <p:dialog header="Item Details" widgetVar="dlg" showEffect="explode" hideEffect="explode" width="58%" height="310" style="margin-top:-250px">
+                    <p:scrollPanel id="leftpane" mode="native" class="panel" style="width:98%;height:300px;background-color: #EFF1F2;border: 0px;float: left" >
+
+                   <div class="col-md-12 padding-0">
+                    <div class="col-md-12">
+                      <div class="panel form-element-padding">
+                        <div class="panel-heading">
+                         <h4 style="color:#000000;">Item Details</h4>
+                        </div>
+                         <div class="panel-body" style="padding-bottom:30px;">
+                          <div class="col-md-12">
+                            <div class="form-group"><label class="col-sm-3 control-label text-left">Name</label>
+                              <div class="col-sm-9">
+                                  <h:inputText id="idnm" readonly="true" class="form-control primary" pt:placeholder="Name" value="#{cartController.itemReq.name}" autocomplete="false" ></h:inputText>                                 
+                              </div>
+                            </div><br/> 
+                            <div class="form-group"><label class="col-sm-3 control-label text-left">Description</label>
+                              <div class="col-sm-9">
+                                  <h:inputText id="desc" readonly="true" class="form-control primary" pt:placeholder="Description" value="#{cartController.itemReq.description}" autocomplete="false" ></h:inputText>                                 
+                              </div>
+                            </div><br/> 
+                              
+                            <div class="form-group"><label class="col-sm-3 control-label text-left">Unit Price</label>
+                              <div class="col-sm-9">
+                                  <p:inputText id="idprc" readonly="true" class="form-control primary" pt:placeholder="Unit Price" value="#{cartController.itemReq.unitPrice}" autocomplete="false" ></p:inputText>
+                              </div>
+                            </div><br/> 
+                            <div class="form-group"><label class="col-sm-3 control-label text-left">Quantity</label>
+                              <div class="col-sm-9">
+                                  <p:inputText onkeyup="$(this).val($(this).val().replace(/[^0-9]/g, ''));" id="idqty" class="form-control primary" pt:placeholder="Quantity" value="#{cartController.itemReq.quantity}" autocomplete="false" >
+                                  <p:ajax  update="tamt" />
+                                  </p:inputText>
+                              </div>
+                            </div><br/> 
+                              
+                            <div class="form-group"><label class="col-sm-3 control-label text-left">Total Amount</label>
+                              <div class="col-sm-9">
+                                  <p:inputText id="tamt" readonly="true" class="form-control primary" pt:placeholder="Total Amount" value="#{cartController.itemReq.unitPrice * cartController.itemReq.quantity}" autocomplete="false" ></p:inputText>
+                              </div>
+                            </div><br/> 
+
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-10">
+
+                                <div class="col-md-3" style="margin-left:0%;">
+                             <p:commandButton ajax="false" value="Close" id="sbtnCancel" class=" btn btn-gradient btn-warning" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%;" />
+                            <br/>
+                            <br/>
+                                </div>
+                                <div class="col-md-6" style="margin-left:0%;">
+                             <p:commandButton id="subitm" value="Add to Cart" class="cart" style="background: linear-gradient(90deg, #42b0f5, #5442f5); color:#ffffff; padding:0%;" actionListener="#{cartController.submitCartItem(cartController.itemReq)}" update="@form" />
+                            </div>
+                                </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                    </p:scrollPanel>                           
+                 </p:dialog>
+              
+                    </h:panelGroup>
+
+          </h:form>          
+        
+   
+            
+
+        
+    
+        </ui:define>
+       </ui:composition>
+    </body>
+</html>
+
